@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Pro - Invite</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',Tahoma,Verdana,sans-serif;
+  background:linear-gradient(to right,#ffecd2,#fcb69f);
+}
+
+/* Top Bar */
+.top-bar{
+  display:flex;
+  justify-content:flex-end;
+  padding:12px 20px;
+  background:#f78f1e;
+}
+.top-bar button{
+  background:#fff;
+  color:#f78f1e;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+/* Container */
+.container{
+  max-width:420px;
+  margin:30px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  text-align:center;
+}
+
+.container h2{
+  margin-top:0;
+  color:#f78f1e;
+}
+
+.ref-box{
+  background:#f8f8f8;
+  padding:15px;
+  border-radius:12px;
+  margin:12px 0;
+  word-break:break-all;
+  font-weight:bold;
+}
+
+.copy-btn{
+  width:100%;
+  padding:14px;
+  background:#f78f1e;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.copy-btn:hover{
+  background:#e57700;
+}
+
+.rule-box{
+  background:#fff3cd;
+  color:#856404;
+  padding:14px;
+  border-radius:12px;
+  margin-top:15px;
+  font-size:14px;
+  text-align:left;
+}
+
+/* Bottom Nav */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 -3px 10px rgba(0,0,0,0.1);
+}
+.bottom-nav a{
+  text-decoration:none;
+  color:#f78f1e;
+  font-weight:bold;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Top -->
+<div class="top-bar">
+  <button>Customer Support: 03105403991</button>
+</div>
+
+<div class="container">
+  <h2>Invite & Earn</h2>
+
+  <p>Your Referral Code</p>
+  <div class="ref-box" id="refCode"></div>
+
+  <p>Your Referral Link</p>
+  <div class="ref-box" id="refLink"></div>
+
+  <button class="copy-btn" onclick="copyLink()">Copy Referral Link</button>
+
+  <!-- Rules -->
+  <div class="rule-box">
+    ✅ <strong>Referral Reward:</strong> PKR 50 per referral<br><br>
+    🔹 Jab aap ka referral deposit karega aur active hoga<br>
+    🔹 Us referral ka reward <strong>Admin Panel se manually add</strong> kiya jayega<br>
+    🔹 Reward turant auto add nahi hota<br>
+    🔹 Fake / self referrals allowed nahi hain
+  </div>
+</div>
+
+<!-- Bottom Nav -->
+<div class="bottom-nav">
+  <a href="home.html">Home</a>
+  <a href="buyplan.html">Buy Plan</a>
+  <a href="myplan.html">My Plan</a>
+  <a href="invite.html">Invite</a>
+  <a href="me.html">Me</a>
+</div>
+
+<script>
+// Generate or load referral code
+let refCode = localStorage.getItem("refCode");
+
+if(!refCode){
+  refCode = "GP" + Math.floor(100000 + Math.random() * 900000);
+  localStorage.setItem("refCode", refCode);
+}
+
+document.getElementById("refCode").innerText = refCode;
+
+let referralLink = "https://gold-pro.gt.tc/register.html?ref=" + refCode;
+document.getElementById("refLink").innerText = referralLink;
+
+function copyLink(){
+  navigator.clipboard.writeText(referralLink);
+  alert("Referral link copied successfully!");
+}
+</script>
+
+</body>
+  </html>
