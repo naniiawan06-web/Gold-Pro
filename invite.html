@@ -136,6 +136,7 @@ body{
 </div>
 
 <script>
+// Generate or load referral code
 let refCode = localStorage.getItem("refCode");
 
 if(!refCode){
@@ -145,8 +146,8 @@ if(!refCode){
 
 document.getElementById("refCode").innerText = refCode;
 
-// ✅ ONLY LINK UPDATED (code untouched)
-let referralLink = "https://naniiawan06-web.github.io/Gold-Pro/;
+// ✅ FINAL LINK — ONLY /Gold-Pro/ (nothing after)
+let referralLink = "https://naniiawan06-web.github.io/Gold-Pro/";
 document.getElementById("refLink").innerText = referralLink;
 
 function copyLink(){
@@ -156,4 +157,4 @@ function copyLink(){
 </script>
 
 </body>
-  </html>
+                                        </html>
