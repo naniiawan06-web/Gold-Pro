@@ -124,11 +124,11 @@ form button:hover{
   <h2>Withdraw Funds</h2>
 
   <div class="info">
-    🔹 Minimum Withdraw: PKR 300  
-    <br>🔹 Withdraw only in 100 range (100, 200, 300…)  
+    🔹 Minimum Withdraw: PKR 600  
+    <br>🔹 Withdraw only in 100 range (600, 700, 800…)  
     <br>🔹 20% tax will be deducted  
-    <br>🔹 Timing: 9AM – 10PM  
-    <br>🔹 Payment received within 24 hours
+    <br>🔹 Timing: 9PM – 12AM  
+    <br>🔹 Payment received within 72 hours
   </div>
 
   <form id="withdrawForm">
@@ -146,7 +146,7 @@ form button:hover{
     <input type="text" required placeholder="Enter account number">
 
     <label>Withdraw Amount *</label>
-    <input type="number" id="amount" required placeholder="Min 100">
+    <input type="number" id="amount" required placeholder="Min 600">
 
     <button type="submit">Request Withdraw</button>
   </form>
@@ -169,8 +169,8 @@ document.getElementById("withdrawForm").addEventListener("submit",function(e){
 
   let amount = document.getElementById("amount").value;
 
-  if(amount < 100){
-    alert("Minimum withdraw is PKR 100");
+  if(amount < 600){
+    alert("Minimum withdraw is PKR 600");
     return;
   }
 
@@ -183,7 +183,7 @@ document.getElementById("withdrawForm").addEventListener("submit",function(e){
   let hour = now.getHours();
 
   if(hour < 9 || hour > 22){
-    alert("Withdraw time is 9AM to 10PM only");
+    alert("Withdraw time is 9PM to 12AM only");
     return;
   }
 
