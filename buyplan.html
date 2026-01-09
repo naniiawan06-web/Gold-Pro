@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Pro - Buy Plan</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to right,#ffecd2,#fcb69f);}
+.container{max-width:500px;margin:20px auto;padding:20px;}
+.plan{background:#fff;border-radius:12px;padding:15px;margin-bottom:15px;box-shadow:0 6px 15px rgba(0,0,0,0.15);}
+.plan h3{color:#f78f1e;margin:0 0 5px;}
+.plan p{margin:3px 0;font-size:14px;}
+.plan button{margin-top:10px;width:100%;padding:12px;background:#f78f1e;color:#fff;border:none;border-radius:10px;font-weight:bold;cursor:pointer;}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -3px 10px rgba(0,0,0,0.1);}
+.bottom-nav a{text-decoration:none;color:#f78f1e;font-weight:bold;font-size:14px;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="plan">
+    <h3>Plan A</h3>
+    <p>Duration: 7 Days</p>
+    <p>Price: PKR 1000</p>
+    <p>Daily Income: PKR 50</p>
+    <button onclick="investPlan('Plan A',1000,50)">Invest Now</button>
+  </div>
+  <div class="plan">
+    <h3>Plan B</h3>
+    <p>Duration: 14 Days</p>
+    <p>Price: PKR 2500</p>
+    <p>Daily Income: PKR 120</p>
+    <button onclick="investPlan('Plan B',2500,120)">Invest Now</button>
+  </div>
+  <div class="plan">
+    <h3>Plan C</h3>
+    <p>Duration: 30 Days</p>
+    <p>Price: PKR 5000</p>
+    <p>Daily Income: PKR 250</p>
+    <button onclick="investPlan('Plan C',5000,250)">Invest Now</button>
+  </div>
+  <div class="plan">
+    <h3>Plan D</h3>
+    <p>Duration: 60 Days</p>
+    <p>Price: PKR 10000</p>
+    <p>Daily Income: PKR 600</p>
+    <button onclick="investPlan('Plan D',10000,600)">Invest Now</button>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="home.html">Home</a>
+  <a href="buyplan.html">Buy Plan</a>
+  <a href="myplan.html">My Plan</a>
+  <a href="invite.html">Invite</a>
+  <a href="me.html">Me</a>
+</div>
+
+<script>
+let currentUser = localStorage.getItem('currentUser');
+if(!currentUser){window.location.href='index.html';}
+
+function investPlan(name,price,daily){
+  let users = JSON.parse(localStorage.getItem('users'))||[];
+  let user = users.find(u=>u.username===currentUser);
+  if(user.balance<price){alert("Insufficient balance"); return;}
+  user.balance -= price;
+  user.plans.push({name:name,price:price,daily:daily,start:new Date()});
+  localStorage.setItem('users',JSON.stringify(users));
+  alert('Plan purchased! Check My Plan');
+  window.location.href='myplan.html';
+}
+</script>
+
+</body>
+    </html>
