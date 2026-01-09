@@ -61,7 +61,7 @@ form button:hover{background:#e57700;}
 
   <!-- Info Message -->
   <div class="info">
-    Minimum Deposit: PKR 500 | Deposit will be approved within 24 hours<br>
+    Minimum Deposit: PKR 500 | Deposit will be auto approved within <strong>2 minutes</strong><br>
     Send money to EasyPaisa Number: <strong>03185281054</strong>
   </div>
 
@@ -88,13 +88,9 @@ form button:hover{background:#e57700;}
     <button type="submit">Submit Deposit</button>
   </form>
 
-  <!-- Admin approve button for simulation -->
-  <button id="admin-approve" style="margin-top:15px; display:none; background:#4caf50;">Admin Approve Deposit</button>
-
   <div id="message"></div>
 </div>
 
-<!-- Bottom Navigation -->
 <div class="bottom-nav">
   <a href="home.html">Home</a>
   <a href="buyplan.html">Buy Plan</a>
@@ -106,7 +102,6 @@ form button:hover{background:#e57700;}
 <script>
 // User balance simulation
 let userBalance = 0;
-let pendingDepositAmount = 0;
 
 document.getElementById('deposit-form').addEventListener('submit', function(e){
   e.preventDefault();
@@ -126,25 +121,23 @@ document.getElementById('deposit-form').addEventListener('submit', function(e){
     return;
   }
 
-  // Simulate deposit submission
-  pendingDepositAmount = amount;
-  document.getElementById('message').style.display = "block";
-  document.getElementById('message').innerText = `Deposit of PKR ${amount} submitted via ${wallet}.\nPending admin approval.`;
+  const msg = document.getElementById('message');
+  msg.style.display = "block";
+  msg.style.background = "#fff3cd";
+  msg.style.color = "#856404";
+  msg.innerText = `Deposit of PKR ${amount} submitted via ${wallet}.\nAuto approving in 2 minutes...`;
 
-  // Show admin approve button for simulation
-  document.getElementById('admin-approve').style.display = "block";
+  // ✅ AUTO APPROVE AFTER 2 MINUTES
+  setTimeout(() => {
+    userBalance += amount;
+    msg.style.background = "#c8e6c9";
+    msg.style.color = "#256029";
+    msg.innerText = `Deposit Approved ✅\nAmount: PKR ${amount}\nNew Balance: PKR ${userBalance}`;
+  }, 120000); // 2 minutes
 
   this.reset();
-});
-
-// Admin approve simulation
-document.getElementById('admin-approve').addEventListener('click', function(){
-  userBalance += pendingDepositAmount;
-  document.getElementById('message').innerText = `Deposit approved! Your new balance is PKR ${userBalance}.`;
-  pendingDepositAmount = 0;
-  this.style.display = "none";
 });
 </script>
 
 </body>
-</html>
+      </html>
