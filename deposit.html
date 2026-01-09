@@ -154,6 +154,25 @@ function renderHistory() {
 // Initial render
 renderHistory();
 
+// Auto-approve pending deposits on page load
+function checkPendingDeposits() {
+  const now = new Date().getTime();
+  depositHistory.forEach(dep => {
+    if(dep.status === 'Pending' && now - dep.timestamp >= 120000){ // 2 minutes
+      dep.status = 'Approved';
+      userBalance += dep.amount;
+      localStorage.setItem('userBalance', userBalance);
+    }
+  });
+  localStorage.setItem('depositHistory', JSON.stringify(depositHistory));
+  document.getElementById('balance').innerText = userBalance;
+  renderHistory();
+}
+
+// Run check on page load
+checkPendingDeposits();
+
+// Deposit form submission
 document.getElementById('deposit-form').addEventListener('submit', function(e){
   e.preventDefault();
   const wallet = this.wallet.value;
@@ -170,18 +189,15 @@ document.getElementById('deposit-form').addEventListener('submit', function(e){
     return;
   }
 
-  // Get current date/time
   const now = new Date();
   const date = now.toLocaleDateString();
   const time = now.toLocaleTimeString();
 
-  // Add to history as Pending
-  const depositEntry = {date,time,wallet,amount,status:'Pending'};
+  const depositEntry = {date,time,wallet,amount,status:'Pending', timestamp: now.getTime()};
   depositHistory.push(depositEntry);
   localStorage.setItem('depositHistory', JSON.stringify(depositHistory));
   renderHistory();
 
-  // Show message
   const msg = document.getElementById('message');
   msg.style.display = "block";
   msg.style.background = "#fff3cd";
@@ -192,21 +208,13 @@ document.getElementById('deposit-form').addEventListener('submit', function(e){
 
   // Auto approve after 2 minutes
   setTimeout(()=>{
-    userBalance += amount;
-    localStorage.setItem('userBalance', userBalance);
-    document.getElementById('balance').innerText = userBalance;
-
-    // Update status in history
-    depositEntry.status = 'Approved';
-    localStorage.setItem('depositHistory', JSON.stringify(depositHistory));
-    renderHistory();
-
+    checkPendingDeposits();
     msg.style.background = "#c8e6c9";
     msg.style.color = "#256029";
     msg.innerText = `Deposit Approved ✅\nAmount: PKR ${amount}\nNew Balance: PKR ${userBalance}`;
-  }, 120000); // 2 minutes
+  }, 120000);
 });
 </script>
 
 </body>
-  </html>
+          </html>
