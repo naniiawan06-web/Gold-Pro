@@ -118,7 +118,6 @@ body{
 
   <button class="copy-btn" onclick="copyLink()">Copy Referral Link</button>
 
-  <!-- Rules -->
   <div class="rule-box">
     ✅ <strong>Referral Reward:</strong> PKR 50 per referral<br><br>
     🔹 Jab aap ka referral deposit karega aur active hoga<br>
@@ -128,7 +127,6 @@ body{
   </div>
 </div>
 
-<!-- Bottom Nav -->
 <div class="bottom-nav">
   <a href="home.html">Home</a>
   <a href="buyplan.html">Buy Plan</a>
@@ -138,7 +136,6 @@ body{
 </div>
 
 <script>
-// Generate or load referral code
 let refCode = localStorage.getItem("refCode");
 
 if(!refCode){
@@ -148,7 +145,8 @@ if(!refCode){
 
 document.getElementById("refCode").innerText = refCode;
 
-let referralLink = "https://gold-pro.gt.tc/register.html?ref=" + refCode;
+// ✅ ONLY LINK UPDATED (code untouched)
+let referralLink = "https://naniiawan06-web.github.io/Gold-Pro/register.html?ref=" + refCode;
 document.getElementById("refLink").innerText = referralLink;
 
 function copyLink(){
